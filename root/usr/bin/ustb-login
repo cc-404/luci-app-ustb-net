@@ -1,0 +1,21 @@
+#!/bin/sh
+
+username=$(uci get ustb-net.@ustb-net[0].username)
+password=$(uci get ustb-net.@ustb-net[0].password)
+ipv6addr=$(uci get ustb-net.@ustb-net[0].ipv6addr)
+
+host=$(uci get ustb-net.@ustb-net[0].host)
+
+if [ -z "$username" ]; then
+	exit 1
+elif [ -z "$password" ]; then
+	exit 1
+fi
+
+if [ -z "$ipv6addr" ]; then
+
+	ipv6addr=`/usr/bin/wget -qO- "http://cippv6.ustb.edu.cn/get_ip.php" | grep -o "2[[:xdigit:]]\+:.*:[[:xdigit:]]\+"`
+
+fi
+
+/usr/bin/wget --post-data="DDDDD=$username&upass=$password&v6ip=$ipv6addr&0MKKey=123456789" http://$host/1.htm -qO /dev/null

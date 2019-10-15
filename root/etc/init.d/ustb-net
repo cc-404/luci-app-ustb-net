@@ -1,0 +1,16 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+STOP=10
+
+autologin=$(uci get ustb-net.@ustb-net[0].autologin)
+start() {
+	[ $autologin -eq "0" ] && exit 0
+	/usr/bin/ustb-login > /dev/null 2>&1
+}
+
+stop() {
+	[ $autologin -eq "0" ] && exit 0
+	/usr/bin/ustb-logout > /dev/null 2>&1
+}
+

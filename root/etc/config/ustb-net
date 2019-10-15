@@ -1,0 +1,7 @@
+
+config ustb-net
+	option autologin '0'
+	option host '202.204.48.82'
+	option username ''
+	option password ''
+	option ipv6addr ''

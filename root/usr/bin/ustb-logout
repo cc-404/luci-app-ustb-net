@@ -1,0 +1,3 @@
+#!/bin/sh
+host=$(uci get ustb-net.@ustb-net[0].host)
+/usr/bin/wget http://$host/F.htm -qO /dev/null
